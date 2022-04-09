@@ -12,9 +12,12 @@ var tree_pass_count := 0
 onready var tree: AnimatedSprite = $Tree
 onready var tree_collision: Area2D = $Tree/Area2D
 onready var screen_notifier: VisibilityNotifier2D = $Tree/VisibilityNotifier2D
+onready var action_label: RichTextLabel = $Control/ActionLabel
 
 func _ready() -> void:
 	tree.play()
+	action_label.set_visible(false)
+	tree_collision.connect('body_entered', self, '_on_tree_entered')
 	tree_collision.connect('body_exited', self, '_on_tree_passed')
 	screen_notifier.connect('screen_exited', self, '_on_tree_exit')
 
@@ -37,8 +40,12 @@ func _input(_event: InputEvent) -> void:
 		var updated_degress = rotation_degrees - 0.6
 		rotation_degrees = updated_degress
 
+func _on_tree_entered(_body: StaticBody2D) -> void:
+	action_label.set_deferred('visible', true)
+ 
 
 func _on_tree_passed(_body: StaticBody2D) -> void:
+	action_label.set_deferred('visible', false)
 	tree_collision.set_deferred('monitoring', false)
 	
 	tree_pass_count += 1
