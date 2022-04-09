@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var globe: Sprite = $Globe
-onready var player: AnimatedSprite = $Player
+onready var player: AnimatedSprite = $Player/Sprite
 
 func _ready() -> void:
 	player.play()
