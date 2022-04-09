@@ -4,6 +4,11 @@ class_name Globe
 signal moving
 signal stopped
 
+onready var tree: AnimatedSprite = $Tree
+
+func _ready() -> void:
+	tree.play()
+
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed('walk_left'):
