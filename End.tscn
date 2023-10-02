@@ -145,7 +145,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
@@ -157,7 +157,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ 0.0 ]
 }
 
@@ -278,7 +278,7 @@ texture = ExtResource( 3 )
 position = Vector2( 505, 102 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 14 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Vlad" type="AnimatedSprite" parent="."]

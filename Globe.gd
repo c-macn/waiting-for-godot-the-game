@@ -29,25 +29,24 @@ func _ready() -> void:
 	screen_notifier.connect('screen_exited', self, '_on_tree_exit')
 
 
-func _input(_event: InputEvent) -> void:
-	print(can_end)
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('walk_left'):
 		emit_signal('moving', false)
-	
+
 	if Input.is_action_just_pressed('walk_right'):
 		emit_signal('moving', true)
-	
+
 	if Input.is_action_just_released('walk_left') or Input.is_action_just_released('walk_right'):
 		emit_signal('stopped')
-	
+
 	if Input.is_action_pressed('walk_left') and not Input.is_action_pressed('walk_right'):
-		var updated_degrees = rotation_degrees + 0.6
+		var updated_degrees = rotation_degrees + 0.3
 		rotation_degrees = updated_degrees
-	
+
 	if Input.is_action_pressed('walk_right') and not Input.is_action_pressed('walk_left'):
-		var updated_degress = rotation_degrees - 0.6
+		var updated_degress = rotation_degrees - 0.3
 		rotation_degrees = updated_degress
-	
+
 	if Input.is_action_just_pressed('can_end') and can_end:
 		$AnimationPlayer.play('go_to_end')
 
@@ -57,19 +56,19 @@ func _on_tree_entered(_body: StaticBody2D) -> void:
 		_estragon_actions()
 		can_end = true
 		action_label.set_deferred('visible', true)
- 
+
 
 func _on_tree_passed(_body: StaticBody2D) -> void:
 	action_label.set_deferred('visible', false)
 	tree_collision.set_deferred('monitoring', false)
-	
+
 	tree_pass_count += 1
 	can_end = false
 
 
 func _on_tree_exit() -> void:
 	tree_collision.set_deferred('monitoring', true)
-	
+
 	if tree_pass_count >= MIN_TREE_PASS_COUNT:
 		estragon.set_deferred('visible', true)
 		estragon_text.set_deferred('visible', false)
@@ -83,3 +82,4 @@ func _estragon_actions() -> void:
 
 func _go_to_end() -> void:
 	get_tree().change_scene('res://End.tscn')
+

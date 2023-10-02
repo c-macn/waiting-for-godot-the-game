@@ -38,23 +38,23 @@ func _on_stopped() -> void:
 
 
 func _on_timeout() -> void:
-	$Tween.interpolate_property($Sprite, 'position', Vector2.ZERO, Vector2(0, -800), 8.0)
-	$Tween.start()
+	$Sprite/TitleTween.interpolate_property($Sprite, 'position', Vector2.ZERO, Vector2(0, -800), 8.0)
+	$Sprite/TitleTween.start()
 
 
 func _transition_cycle(transition_type: int) -> void:
 	if transition_type == TRANSITION_TYPE.NIGHTTODAY:
 		$Tween.interpolate_property(night_sky, 'modulate', Color(1, 1, 1, 1), Color(1, 1, 1, 0),
-			30.0, Tween.TRANS_QUAD, Tween.EASE_IN)
-			
-		$Tween.interpolate_callback(self, 30.0, '_update_transition', TRANSITION_TYPE.DAYTONIGHT)
+			20.0, Tween.TRANS_QUAD, Tween.EASE_IN)
+
+		$Tween.interpolate_callback(self, 20.0, '_update_transition', TRANSITION_TYPE.DAYTONIGHT)
 		$Tween.start()
-	
+
 	if transition_type == TRANSITION_TYPE.DAYTONIGHT:
 		$Tween.interpolate_property(night_sky, 'modulate', Color(1, 1, 1, 0), Color(1, 1, 1, 1),
-			30.0, Tween.TRANS_QUAD, Tween.EASE_IN)
-			
-		$Tween.interpolate_callback(self, 30.0, '_update_transition', TRANSITION_TYPE.NIGHTTODAY)
+			20.0, Tween.TRANS_QUAD, Tween.EASE_IN)
+
+		$Tween.interpolate_callback(self, 20.0, '_update_transition', TRANSITION_TYPE.NIGHTTODAY)
 		$Tween.start()
 
 
